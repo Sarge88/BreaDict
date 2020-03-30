@@ -63,10 +63,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void addNewWord(View view){
 
+        TableRow.LayoutParams  params1=new TableRow.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT,1.0f);
         TableLayout table = findViewById(R.id.table);
         Button add = findViewById(R.id.addNewWord);
 
+        TextView txt1=new TextView(this);
+        txt1.setText("asd");
+
         TableRow newRow = new TableRow(this);// add views to the row
+        newRow.addView(txt1);
+
         newRow.addView(new TextView(this)); // you would actually want to set properties on this before adding it
 
         // add the row to the table layout
