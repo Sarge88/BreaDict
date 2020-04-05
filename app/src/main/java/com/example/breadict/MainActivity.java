@@ -34,6 +34,39 @@ public class MainActivity extends AppCompatActivity {
 
         myTextView=(TextView)findViewById(R.id.timer);
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("New word");
+        builder.setIcon(R.drawable.ic_launcher_background);
+        builder.setMessage("Please add a word.");
+
+        input = new EditText(this);
+        builder.setView(input);
+
+        builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String txt = input.getText().toString();
+                addNewWord(txt);
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        final AlertDialog ad = builder.create();
+
+        addBtn = (Button) findViewById(R.id.addNewWord);
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ad.show();
+            }
+        });
+
         Timer T=new Timer();
         T.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -67,46 +100,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void addNewWord(View view){
+    public void addNewWord(String txt){
+
+        TextView txt1 = new TextView(this);
+
+        txt1.setText(txt);
 
         TableRow.LayoutParams  params1=new TableRow.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT,1.0f);
         TableLayout table = findViewById(R.id.table);
-
-        final TextView txt1=new TextView(this);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("New word");
-        builder.setIcon(R.drawable.ic_launcher_background);
-        builder.setMessage("Please add a word.");
-
-        input = new EditText(this);
-        builder.setView(input);
-
-        builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String txt = input.getText().toString();
-                txt1.setText(txt);
-            }
-        });
-
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-        final AlertDialog ad = builder.create();
-
-        addBtn = (Button) findViewById(R.id.addNewWord);
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ad.show();
-            }
-        });
-
 
         TableRow newRow = new TableRow(this);// add views to the row
         newRow.addView(txt1);
