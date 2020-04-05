@@ -38,43 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         myTextView=(TextView)findViewById(R.id.timer);
 
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setTitle("New word");
-        dialog.setIcon(R.drawable.ic_launcher_background);
-        dialog.setMessage("Please add a word.");
-
-        input = new EditText(this);
-        dialog.setView(input);
-
-        //input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)
-
-
-
-        dialog.setPositiveButton("Add", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String szo = input.getText().toString();
-                String[] tomb = szo.split(" ");
-                addNewWord(tomb[0],tomb[1]);
-            }
-        });
-
-        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-        final AlertDialog ad = dialog.create();
-
-        addBtn = (Button) findViewById(R.id.addNewWord);
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ad.show();
-            }
-        });
+        addDialog();
 
         Timer T=new Timer();
         T.scheduleAtFixedRate(new TimerTask() {
@@ -129,6 +93,46 @@ public class MainActivity extends AppCompatActivity {
         // add the row to the table layout
         //table.addView(params1, new TableLayout.LayoutParams());
         table.addView(newRow);
+    }
+
+    public void addDialog(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("New word");
+        dialog.setIcon(R.drawable.ic_launcher_background);
+        dialog.setMessage("[German word] - [Hungarian word]");
+
+        input = new EditText(this);
+        dialog.setView(input);
+
+        //input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)
+
+
+
+        dialog.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String szo = input.getText().toString();
+                String[] tomb = szo.split("-");
+                addNewWord(tomb[0],tomb[1]);
+            }
+        });
+
+        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        final AlertDialog ad = dialog.create();
+
+        addBtn = (Button) findViewById(R.id.addNewWord);
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ad.show();
+            }
+        });
     }
 
 }
