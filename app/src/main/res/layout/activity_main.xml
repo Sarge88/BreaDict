@@ -85,6 +85,15 @@
         android:layout_gravity="center"
         android:onClick="addNewWord"
         />
+    <Button
+        android:id="@+id/colorize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Colorize"
+        android:textAllCaps="false"
+        android:layout_gravity="center"
+        android:onClick="colorize"
+        />
 
     <TextView
         android:id="@+id/timer"
@@ -93,5 +102,7 @@
         android:layout_gravity="center"
 
         android:textAllCaps="false" />
+
+
 
 </LinearLayout>
