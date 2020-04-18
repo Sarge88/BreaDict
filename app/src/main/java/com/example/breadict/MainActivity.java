@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Colorize");
         dialog.setIcon(R.drawable.ic_launcher_background);
-        dialog.setMessage("[Word] - [Color]");
+        dialog.setMessage("[Word] - [Color] | Colors: red, green, yellow");
 
         input2 = new EditText(this);
         dialog.setView(input2);
