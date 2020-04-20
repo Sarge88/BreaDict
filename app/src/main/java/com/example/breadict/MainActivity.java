@@ -4,11 +4,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
@@ -16,8 +19,13 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -28,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     Button colorizeBtn;
     EditText input2;
     TextView myTextView;
+    ArrayList<String> words;
     int count=0;
 
     private boolean
@@ -38,7 +47,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        loadData();
+
         myTextView=(TextView)findViewById(R.id.timer);
+
+        Button saveBtn = findViewById(R.id.save);
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveData();
+            }
+        });
 
         addDialog();
         colorizeDialog();
@@ -76,26 +95,57 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void saveData() {
+        SharedPreferences sh = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sh.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(words);
+        editor.putString("dict", json);
+        editor.apply();
+    }
+
+    private void loadData() {
+        SharedPreferences sh = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sh.getString("dict", null);
+        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        words = gson.fromJson(json, type);
+
+        if(words == null) {
+            words = new ArrayList<>();
+        }
+
+
+        for(int i=0; i<words.size(); i++) {
+            String szo = words.get(i);
+            String[] tomb = szo.split("-");
+            TextView txt1 = new TextView(this);
+            TextView txt2 = new TextView(this);
+            txt1.setText(tomb[0]);
+            txt2.setText(tomb[1]);
+            TableLayout table = findViewById(R.id.table);
+            TableRow newRow = new TableRow(this);// add views to the row
+            newRow.addView(txt1);
+            newRow.addView(txt2);
+            newRow.addView(new TextView(this)); // you would actually want to set properties on this before adding it
+            table.addView(newRow, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        }
+    }
+
     public void addNewWord(String input1, String input2){
+        String word = input1 + "-" + input2;
+        words.add(word);
 
         TextView txt1 = new TextView(this);
         TextView txt2 = new TextView(this);
-
         txt1.setText(input1);
         txt2.setText(input2);
-
-        //TableRow.LayoutParams  params1=new TableRow.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT,1.0f);
         TableLayout table = findViewById(R.id.table);
-
         TableRow newRow = new TableRow(this);// add views to the row
         newRow.addView(txt1);
         newRow.addView(txt2);
-
         newRow.addView(new TextView(this)); // you would actually want to set properties on this before adding it
-
-        // add the row to the table layout
-        //table.addView(params1, new TableLayout.LayoutParams());
-        table.addView(newRow);
+        table.addView(newRow, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
     public void addDialog(){

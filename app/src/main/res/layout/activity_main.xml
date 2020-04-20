@@ -10,8 +10,6 @@
     tools:context=".MainActivity">
 
 
-
-
     <TableLayout
         android:id="@+id/table"
         android:layout_width="match_parent"
@@ -94,6 +92,15 @@
         android:layout_gravity="center"
         android:onClick="colorize"
         />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="99dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="save"
+        android:text="Save"
+        android:textAllCaps="false" />
 
     <TextView
         android:id="@+id/timer"
