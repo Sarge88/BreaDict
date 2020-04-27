@@ -115,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
             words = new ArrayList<>();
         }
 
-
         for(int i=0; i<words.size(); i++) {
             String szo = words.get(i);
             String[] tomb = szo.split("-");
