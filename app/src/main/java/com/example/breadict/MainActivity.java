@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run()
                     {
-                        myTextView.setText("How many seconds did I study: "+count);
+                        myTextView.setText("Mennyit tanultam: "+count);
                         count++;
                     }
                 });
@@ -87,11 +88,11 @@ public class MainActivity extends AppCompatActivity {
 
         if(table_flg){
             table_flg = false;
-            showGermanBtn.setText("Show German");
+            showGermanBtn.setText("Német szavak mutatása");
         }
         else{
             table_flg = true;
-            showGermanBtn.setText("Hide German");
+            showGermanBtn.setText("Német szavak elrejtése");
         }
     }
 
@@ -110,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
         String json = sh.getString("dict", null);
         Type type = new TypeToken<ArrayList<String>>() {}.getType();
         words = gson.fromJson(json, type);
+        TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f);
 
         if(words == null) {
             words = new ArrayList<>();
@@ -122,6 +124,10 @@ public class MainActivity extends AppCompatActivity {
             TextView txt2 = new TextView(this);
             txt1.setText(tomb[0]);
             txt2.setText(tomb[1]);
+            txt1.setGravity(Gravity.CENTER);
+            txt2.setGravity(Gravity.CENTER);
+            txt1.setLayoutParams(params);
+            txt2.setLayoutParams(params);
             TableLayout table = findViewById(R.id.table);
             TableRow newRow = new TableRow(this);// add views to the row
             newRow.addView(txt1);
@@ -132,26 +138,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addNewWord(String input1, String input2){
+        TableLayout table = findViewById(R.id.table);
+        TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f);
+
         String word = input1 + "-" + input2;
         words.add(word);
 
         TextView txt1 = new TextView(this);
+        //TextView txt1 = findViewById(R.id.row1);
         TextView txt2 = new TextView(this);
         txt1.setText(input1);
         txt2.setText(input2);
-        TableLayout table = findViewById(R.id.table);
+        txt1.setGravity(Gravity.CENTER);
+        txt2.setGravity(Gravity.CENTER);
+        txt1.setLayoutParams(params);
+        txt2.setLayoutParams(params);
+
         TableRow newRow = new TableRow(this);// add views to the row
+        //TableRow newRow = findViewById(R.id.line1);// add views to the row
         newRow.addView(txt1);
         newRow.addView(txt2);
         newRow.addView(new TextView(this)); // you would actually want to set properties on this before adding it
+        //newRow.addView(findViewById(R.id.line1)); // you would actually want to set properties on this before adding it
+
+
         table.addView(newRow, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
     public void addDialog(){
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setTitle("New word");
+        dialog.setTitle("Új szó");
         dialog.setIcon(R.drawable.ic_launcher_background);
-        dialog.setMessage("[German word] - [Hungarian word]");
+        dialog.setMessage("[Német szó] - [Magyar szó]");
 
         input = new EditText(this);
         dialog.setView(input);
@@ -160,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        dialog.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+        dialog.setPositiveButton("Hozzáadás", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String szo = input.getText().toString();
@@ -169,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        dialog.setNegativeButton("Mégse", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -203,15 +221,15 @@ public class MainActivity extends AppCompatActivity {
                     String s = (String) text.getText().toString();
                     boolean correct = word.equals(s);
                     if (correct){
-                        if (color.equals("red")){
+                        if (color.equals("p")){
                             view.setBackgroundColor(0xFFFA8072);
                             view2.setBackgroundColor(0xFFFA8072);
                         }
-                        else if (color.equals("green")){
+                        else if (color.equals("z")){
                             view.setBackgroundColor(0xFF00FF00);
                             view2.setBackgroundColor(0xFF00FF00);
                         }
-                        else if(color.equals("yellow")){
+                        else if(color.equals("s")){
                             view.setBackgroundColor(0xFFFFFF00);
                             view2.setBackgroundColor(0xFFFFFF00);
                         }
@@ -223,9 +241,9 @@ public class MainActivity extends AppCompatActivity {
     }
     public void colorizeDialog(){
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setTitle("Colorize");
+        dialog.setTitle("Színezés");
         dialog.setIcon(R.drawable.ic_launcher_background);
-        dialog.setMessage("[Word] - [Color] | Colors: red, green, yellow");
+        dialog.setMessage("[Magyar szó] - [színkód] | színkódok: p (piros), z (zöld), s (sárga)");
 
         input2 = new EditText(this);
         dialog.setView(input2);
@@ -234,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        dialog.setPositiveButton("Colorize", new DialogInterface.OnClickListener() {
+        dialog.setPositiveButton("Színezés", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String szo = input2.getText().toString();
@@ -242,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
                 colorize(tomb[0],tomb[1]);
             }
         });
-        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        dialog.setNegativeButton("Mégse", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

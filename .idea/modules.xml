@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BreaDict.iml" filepath="$PROJECT_DIR$/BreaDict.iml" group="BreaDict" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="BreaDict/app" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/bread.iml" filepath="$PROJECT_DIR$/.idea/bread.iml" />
     </modules>
   </component>
 </project>

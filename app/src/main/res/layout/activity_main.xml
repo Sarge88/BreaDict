@@ -43,13 +43,14 @@
                 android:background="#f1f1f1"/>
         </TableRow>
 
+
     </TableLayout>
 
     <Button
         android:id="@+id/showGermanBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Show German"
+        android:text="Német szavak mutatása"
         android:textAllCaps="false"
         android:layout_gravity="center"
         android:onClick="collapseTable"
@@ -59,7 +60,7 @@
         android:id="@+id/addNewWord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add new word"
+        android:text="Új szó hozzáadása"
         android:textAllCaps="false"
         android:layout_gravity="center"
         android:onClick="addNewWord"
@@ -68,7 +69,7 @@
         android:id="@+id/colorize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Colorize"
+        android:text="Színezés"
         android:textAllCaps="false"
         android:layout_gravity="center"
         android:onClick="colorize"
@@ -80,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:onClick="save"
-        android:text="Save"
+        android:text="Mentés"
         android:textAllCaps="false" />
 
     <TextView
