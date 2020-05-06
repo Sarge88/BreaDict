@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -27,6 +28,8 @@ import org.w3c.dom.Text;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -40,11 +43,11 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> words;
     int count=0;
 
-    private boolean
-    table_flg = false;
+    private boolean table_flg = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        table_flg = false;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TableLayout table = findViewById(R.id.table);
@@ -54,14 +57,6 @@ public class MainActivity extends AppCompatActivity {
         loadData();
 
         myTextView=(TextView)findViewById(R.id.timer);
-
-        Button saveBtn = findViewById(R.id.save);
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveData();
-            }
-        });
 
         addDialog();
         colorizeDialog();
@@ -120,6 +115,30 @@ public class MainActivity extends AppCompatActivity {
             words = new ArrayList<>();
         }
 
+        Collections.sort(words, new Comparator<String>() {
+            @Override
+            public int compare(String s1, String s2) {
+                return s1.compareToIgnoreCase(s2);
+            }
+        });
+
+        TextView txtm = new TextView(this);
+        TextView txtn = new TextView(this);
+        txtm.setText("Magyar");
+        txtn.setText("Német");
+        txtm.setGravity(Gravity.CENTER);
+        txtn.setGravity(Gravity.CENTER);
+        txtm.setLayoutParams(params);
+        txtn.setLayoutParams(params);
+        txtm.setTypeface(Typeface.MONOSPACE, Typeface.BOLD);
+        txtn.setTypeface(Typeface.MONOSPACE, Typeface.BOLD);
+        TableLayout tableT = findViewById(R.id.table);
+        TableRow newRowT = new TableRow(this);// add views to the row
+        newRowT.addView(txtm);
+        newRowT.addView(txtn);
+        newRowT.addView(new TextView(this)); // you would actually want to set properties on this before adding it
+        tableT.addView(newRowT, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
         for(int i=0; i<words.size(); i++) {
             String szo = words.get(i);
             String[] tomb = szo.split("-");
@@ -145,27 +164,12 @@ public class MainActivity extends AppCompatActivity {
         TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f);
 
         String word = input1 + "-" + input2;
+
+        clearTable();
+
         words.add(word);
-
-        TextView txt1 = new TextView(this);
-        //TextView txt1 = findViewById(R.id.row1);
-        TextView txt2 = new TextView(this);
-        txt1.setText(input1);
-        txt2.setText(input2);
-        txt1.setGravity(Gravity.CENTER);
-        txt2.setGravity(Gravity.CENTER);
-        txt1.setLayoutParams(params);
-        txt2.setLayoutParams(params);
-
-        TableRow newRow = new TableRow(this);// add views to the row
-        //TableRow newRow = findViewById(R.id.line1);// add views to the row
-        newRow.addView(txt1);
-        newRow.addView(txt2);
-        newRow.addView(new TextView(this)); // you would actually want to set properties on this before adding it
-        //newRow.addView(findViewById(R.id.line1)); // you would actually want to set properties on this before adding it
-
-
-        table.addView(newRow, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        saveData();
+        loadData();
     }
 
     public void addDialog(){
@@ -208,9 +212,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void clearTable(){
+        TableLayout table = findViewById(R.id.table);
+        table.removeAllViews();
+    }
+
     public void colorize(String word, String color){
         TableLayout table = findViewById(R.id.table);
-        int n = 0;
         for (int i = 1; i < table.getChildCount(); i++) {
             View child = table.getChildAt(i);
 
@@ -220,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
                 for (int x = 1; x < row.getChildCount(); x=x+2) {
                     View view = row.getChildAt(x);
                     View view2 = row.getChildAt(x-1);
-                    TextView text = (TextView) view;
+                    TextView text = (TextView) view2;
                     String s = (String) text.getText().toString();
                     boolean correct = word.equals(s);
                     if (correct){

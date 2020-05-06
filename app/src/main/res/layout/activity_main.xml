@@ -25,28 +25,6 @@
             android:background="#ffffff"
             android:collapseColumns="0">
 
-            <TableRow>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="#f1f1f1"
-                    android:gravity="center"
-                    android:text="Magyar"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="#f1f1f1"
-                    android:gravity="center"
-                    android:text="Német"
-                    android:textStyle="bold" />
-
-            </TableRow>
-
 
         </TableLayout>
     </ScrollView>
@@ -58,15 +36,15 @@
 
         <Button
             android:id="@+id/colorize"
-            android:layout_width="wrap_content"
+            android:layout_width="195dp"
             android:layout_height="54dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
-            android:layout_marginLeft="258dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginLeft="222dp"
+            android:layout_marginTop="14dp"
             android:layout_marginRight="-1dp"
             android:layout_marginBottom="63dp"
             android:onClick="colorize"
@@ -82,9 +60,9 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
-            android:layout_marginLeft="0dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="74dp"
-            android:layout_marginRight="227dp"
+            android:layout_marginRight="222dp"
             android:layout_marginBottom="0dp"
             android:onClick="collapseTable"
             android:text="Német szavak mutatása"
@@ -92,36 +70,19 @@
 
         <Button
             android:id="@+id/addNewWord"
-            android:layout_width="wrap_content"
-            android:layout_height="53dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="center"
-            android:layout_marginLeft="6dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginRight="263dp"
-            android:layout_marginBottom="63dp"
-            android:onClick="addNewWord"
-            android:text="Új szó hozzáadása"
-            android:textAllCaps="false" />
-
-        <Button
-            android:id="@+id/save"
-            android:layout_width="wrap_content"
+            android:layout_width="211dp"
             android:layout_height="54dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
-            android:layout_marginLeft="149dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginRight="155dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="199dp"
             android:layout_marginBottom="63dp"
-            android:onClick="save"
-            android:text="Mentés"
+            android:onClick="addNewWord"
+            android:text="Új szó hozzáadása"
             android:textAllCaps="false" />
 
         <TextView
