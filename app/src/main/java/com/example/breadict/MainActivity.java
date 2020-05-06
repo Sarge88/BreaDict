@@ -47,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        TableLayout table = findViewById(R.id.table);
+        table.setColumnCollapsed(0, false);
+        table.setColumnCollapsed(1, true);
 
         loadData();
 
@@ -84,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     public void collapseTable(View view){
         TableLayout table = findViewById(R.id.table);
         Button showGermanBtn = findViewById(R.id.showGermanBtn);
-        table.setColumnCollapsed(0, table_flg);
+        table.setColumnCollapsed(1, table_flg);
 
         if(table_flg){
             table_flg = false;
@@ -169,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Új szó");
         dialog.setIcon(R.drawable.ic_launcher_background);
-        dialog.setMessage("[Német szó] - [Magyar szó]");
+        dialog.setMessage("[Magyar szó]-[Német szó]");
 
         input = new EditText(this);
         dialog.setView(input);
