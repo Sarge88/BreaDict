@@ -2,96 +2,145 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:fillViewport="true"
     android:background="#ffffff"
     tools:context=".MainActivity">
 
 
-    <TableLayout
-        android:id="@+id/table"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="30dp"
-        android:layout_marginHorizontal="10dp"
-        android:background="#ffffff"
-        android:layout_marginRight="1dp"
-        android:layout_marginBottom="1dp"
-        android:collapseColumns="0"
-        >
+        android:layout_height="468dp">
 
-    <TableRow>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Német"
-                android:textStyle="bold"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:background="#f1f1f1"/>
+        <TableLayout
+            android:id="@+id/table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="30dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginBottom="1dp"
+            android:background="#ffffff"
+            android:collapseColumns="0">
 
+            <TableRow>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Magyar"
-                android:textStyle="bold"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:background="#f1f1f1"/>
-        </TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#f1f1f1"
+                    android:gravity="center"
+                    android:text="Német"
+                    android:textStyle="bold" />
 
 
-    </TableLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#f1f1f1"
+                    android:gravity="center"
+                    android:text="Magyar"
+                    android:textStyle="bold" />
+            </TableRow>
 
-    <Button
-        android:id="@+id/showGermanBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Német szavak mutatása"
-        android:textAllCaps="false"
-        android:layout_gravity="center"
-        android:onClick="collapseTable"
-        />
 
-    <Button
-        android:id="@+id/addNewWord"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Új szó hozzáadása"
-        android:textAllCaps="false"
-        android:layout_gravity="center"
-        android:onClick="addNewWord"
-        />
-    <Button
-        android:id="@+id/colorize"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Színezés"
-        android:textAllCaps="false"
-        android:layout_gravity="center"
-        android:onClick="colorize"
-        />
+        </TableLayout>
+    </ScrollView>
 
-    <Button
-        android:id="@+id/save"
-        android:layout_width="99dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:onClick="save"
-        android:text="Mentés"
-        android:textAllCaps="false" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="131dp"
+        android:layout_gravity="bottom">
 
-    <TextView
-        android:id="@+id/timer"
-        android:layout_width="wrap_content"
-        android:layout_height="65dp"
-        android:layout_gravity="center"
+        <Button
+            android:id="@+id/colorize"
+            android:layout_width="wrap_content"
+            android:layout_height="54dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="258dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="-1dp"
+            android:layout_marginBottom="63dp"
+            android:onClick="colorize"
+            android:text="Színezés"
+            android:textAllCaps="false" />
 
-        android:textAllCaps="false" />
+        <Button
+            android:id="@+id/showGermanBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="74dp"
+            android:layout_marginRight="227dp"
+            android:layout_marginBottom="0dp"
+            android:onClick="collapseTable"
+            android:text="Német szavak mutatása"
+            android:textAllCaps="false" />
 
+        <Button
+            android:id="@+id/addNewWord"
+            android:layout_width="wrap_content"
+            android:layout_height="53dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="263dp"
+            android:layout_marginBottom="63dp"
+            android:onClick="addNewWord"
+            android:text="Új szó hozzáadása"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="54dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="149dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="155dp"
+            android:layout_marginBottom="63dp"
+            android:onClick="save"
+            android:text="Mentés"
+            android:textAllCaps="false" />
+
+        <TextView
+            android:id="@+id/timer"
+            android:layout_width="166dp"
+            android:layout_height="26dp"
+
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="210dp"
+            android:layout_marginTop="88dp"
+            android:layout_marginRight="36dp"
+            android:layout_marginBottom="14dp"
+            android:textAllCaps="false" />
+
+    </RelativeLayout>
 
 
 </LinearLayout>
