@@ -156,6 +156,24 @@ public class MainActivity extends AppCompatActivity {
             newRow.addView(txt2);
             newRow.addView(new TextView(this)); // you would actually want to set properties on this before adding it
             table.addView(newRow, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+            String color = tomb[2];
+
+            if (color.equals("p")){
+                txt1.setBackgroundColor(0xFFFA8072);
+                txt2.setBackgroundColor(0xFFFA8072);
+                words.set(i, tomb[0]+"-"+tomb[1]+"-p");
+            }
+            else if (color.equals("z")){
+                txt1.setBackgroundColor(0xFF00FF00);
+                txt2.setBackgroundColor(0xFF00FF00);
+                words.set(i, tomb[0]+"-"+tomb[1]+"-z");
+            }
+            else if(color.equals("s")){
+                txt1.setBackgroundColor(0xFFFFFF00);
+                txt2.setBackgroundColor(0xFFFFFF00);
+                words.set(i, tomb[0]+"-"+tomb[1]+"-s");
+            }
         }
     }
 
@@ -163,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
         TableLayout table = findViewById(R.id.table);
         TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f);
 
-        String word = input1 + "-" + input2;
+        String word = input1 + "-" + input2 + "-0";
 
         clearTable();
 
@@ -231,19 +249,36 @@ public class MainActivity extends AppCompatActivity {
                     TextView text = (TextView) view2;
                     String s = (String) text.getText().toString();
                     boolean correct = word.equals(s);
+                    System.out.println(s+" "+word+" "+correct);
                     if (correct){
-                        if (color.equals("p")){
-                            view.setBackgroundColor(0xFFFA8072);
-                            view2.setBackgroundColor(0xFFFA8072);
+                        for(int z=0; z<words.size(); ++z){
+                            String[] tomb = words.get(z).split("-");
+                            System.out.println(tomb[0]+" "+word);
+                            if(tomb[0].equals(word)){
+                                if (color.equals("p")){
+                                    view.setBackgroundColor(0xFFFA8072);
+                                    view2.setBackgroundColor(0xFFFA8072);
+                                    words.set(z, tomb[0]+"-"+tomb[1]+"-p");
+                                }
+                                else if (color.equals("z")){
+                                    view.setBackgroundColor(0xFF00FF00);
+                                    view2.setBackgroundColor(0xFF00FF00);
+                                    words.set(z, tomb[0]+"-"+tomb[1]+"-z");
+                                }
+                                else if(color.equals("s")){
+                                    view.setBackgroundColor(0xFFFFFF00);
+                                    view2.setBackgroundColor(0xFFFFFF00);
+                                    words.set(z, tomb[0]+"-"+tomb[1]+"-s");
+                                }
+                                else if(color.equals("0")){
+                                    view.setBackgroundColor(0xFFFFFF);
+                                    view2.setBackgroundColor(0xFFFFFF);
+                                    words.set(z, tomb[0]+"-"+tomb[1]+"-0");
+                                }
+                                saveData();
+                            }
                         }
-                        else if (color.equals("z")){
-                            view.setBackgroundColor(0xFF00FF00);
-                            view2.setBackgroundColor(0xFF00FF00);
-                        }
-                        else if(color.equals("s")){
-                            view.setBackgroundColor(0xFFFFFF00);
-                            view2.setBackgroundColor(0xFFFFFF00);
-                        }
+
                     }
 
                 }
@@ -254,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Színezés");
         dialog.setIcon(R.drawable.ic_launcher_background);
-        dialog.setMessage("[Magyar szó] - [színkód] | színkódok: p (piros), z (zöld), s (sárga)");
+        dialog.setMessage("[Magyar szó] - [színkód] | színkódok: p (piros), z (zöld), s (sárga), 0 (töröl)");
 
         input2 = new EditText(this);
         dialog.setView(input2);
