@@ -132,6 +132,8 @@ public class MainActivity extends AppCompatActivity {
         txtn.setLayoutParams(params);
         txtm.setTypeface(Typeface.MONOSPACE, Typeface.BOLD);
         txtn.setTypeface(Typeface.MONOSPACE, Typeface.BOLD);
+        txtm.setBackgroundColor(Color.LTGRAY);
+        txtn.setBackgroundColor(Color.LTGRAY);
         TableLayout tableT = findViewById(R.id.table);
         TableRow newRowT = new TableRow(this);// add views to the row
         newRowT.addView(txtm);
@@ -160,18 +162,18 @@ public class MainActivity extends AppCompatActivity {
             String color = tomb[2];
 
             if (color.equals("p")){
-                txt1.setBackgroundColor(0xFFFA8072);
-                txt2.setBackgroundColor(0xFFFA8072);
+                txt1.setBackgroundColor(Color.RED);
+                txt2.setBackgroundColor(Color.RED);
                 words.set(i, tomb[0]+"-"+tomb[1]+"-p");
             }
             else if (color.equals("z")){
-                txt1.setBackgroundColor(0xFF00FF00);
-                txt2.setBackgroundColor(0xFF00FF00);
+                txt1.setBackgroundColor(Color.GREEN);
+                txt2.setBackgroundColor(Color.GREEN);
                 words.set(i, tomb[0]+"-"+tomb[1]+"-z");
             }
             else if(color.equals("s")){
-                txt1.setBackgroundColor(0xFFFFFF00);
-                txt2.setBackgroundColor(0xFFFFFF00);
+                txt1.setBackgroundColor(Color.YELLOW);
+                txt2.setBackgroundColor(Color.YELLOW);
                 words.set(i, tomb[0]+"-"+tomb[1]+"-s");
             }
         }
@@ -256,23 +258,23 @@ public class MainActivity extends AppCompatActivity {
                             System.out.println(tomb[0]+" "+word);
                             if(tomb[0].equals(word)){
                                 if (color.equals("p")){
-                                    view.setBackgroundColor(0xFFFA8072);
-                                    view2.setBackgroundColor(0xFFFA8072);
+                                    view.setBackgroundColor(Color.RED);
+                                    view2.setBackgroundColor(Color.RED);
                                     words.set(z, tomb[0]+"-"+tomb[1]+"-p");
                                 }
                                 else if (color.equals("z")){
-                                    view.setBackgroundColor(0xFF00FF00);
-                                    view2.setBackgroundColor(0xFF00FF00);
+                                    view.setBackgroundColor(Color.GREEN);
+                                    view2.setBackgroundColor(Color.GREEN);
                                     words.set(z, tomb[0]+"-"+tomb[1]+"-z");
                                 }
                                 else if(color.equals("s")){
-                                    view.setBackgroundColor(0xFFFFFF00);
-                                    view2.setBackgroundColor(0xFFFFFF00);
+                                    view.setBackgroundColor(Color.YELLOW);
+                                    view2.setBackgroundColor(Color.YELLOW);
                                     words.set(z, tomb[0]+"-"+tomb[1]+"-s");
                                 }
                                 else if(color.equals("0")){
-                                    view.setBackgroundColor(0xFFFFFF);
-                                    view2.setBackgroundColor(0xFFFFFF);
+                                    view.setBackgroundColor(Color.WHITE);
+                                    view2.setBackgroundColor(Color.WHITE);
                                     words.set(z, tomb[0]+"-"+tomb[1]+"-0");
                                 }
                                 saveData();
