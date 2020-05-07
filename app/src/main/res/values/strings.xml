@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">BreaDict</string>
+    <string-array name="colors">
+        <item>Piros</item>
+        <item>Sárga</item>
+        <item>Zöld</item>
+        <item>Fehér</item>
+
+    </string-array>
 </resources>

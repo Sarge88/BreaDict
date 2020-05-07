@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     TextView myTextView;
     ArrayList<String> words;
     int count=0;
-
+    String selectedColor;
     private boolean table_flg = false;
 
     @Override
@@ -257,22 +257,23 @@ public class MainActivity extends AppCompatActivity {
                             String[] tomb = words.get(z).split("-");
                             System.out.println(tomb[0]+" "+word);
                             if(tomb[0].equals(word)){
-                                if (color.equals("p")){
+                                if (color.equals("Piros")){
                                     view.setBackgroundColor(Color.RED);
                                     view2.setBackgroundColor(Color.RED);
                                     words.set(z, tomb[0]+"-"+tomb[1]+"-p");
                                 }
-                                else if (color.equals("z")){
+                                else if (color.equals("Zöld")){
                                     view.setBackgroundColor(Color.GREEN);
                                     view2.setBackgroundColor(Color.GREEN);
                                     words.set(z, tomb[0]+"-"+tomb[1]+"-z");
+
                                 }
-                                else if(color.equals("s")){
+                                else if(color.equals("Sárga")){
                                     view.setBackgroundColor(Color.YELLOW);
                                     view2.setBackgroundColor(Color.YELLOW);
                                     words.set(z, tomb[0]+"-"+tomb[1]+"-s");
                                 }
-                                else if(color.equals("0")){
+                                else if(color.equals("Fehér")){
                                     view.setBackgroundColor(Color.WHITE);
                                     view2.setBackgroundColor(Color.WHITE);
                                     words.set(z, tomb[0]+"-"+tomb[1]+"-0");
@@ -288,10 +289,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void colorizeDialog(){
+
+        final String[] colors = getResources().getStringArray(R.array.colors);
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Színezés");
         dialog.setIcon(R.drawable.ic_launcher_background);
-        dialog.setMessage("[Magyar szó] - [színkód] | színkódok: p (piros), z (zöld), s (sárga), 0 (töröl)");
+        //dialog.setMessage("[Magyar szó] - [színkód] | színkódok: p (piros), z (zöld), s (sárga), 0 (töröl)");
+
 
         input2 = new EditText(this);
         dialog.setView(input2);
@@ -299,13 +303,20 @@ public class MainActivity extends AppCompatActivity {
         //input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)
 
 
+        dialog.setSingleChoiceItems(R.array.colors, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                selectedColor = colors[which];
+                Toast.makeText(getApplicationContext(),"Most írja be a kiszinezendő szót magyarul!",Toast.LENGTH_LONG).show();
+            }
+        });
 
         dialog.setPositiveButton("Színezés", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String szo = input2.getText().toString();
-                String[] tomb = szo.split("-");
-                colorize(tomb[0],tomb[1]);
+
+                colorize(szo,selectedColor);
             }
         });
         dialog.setNegativeButton("Mégse", new DialogInterface.OnClickListener() {
