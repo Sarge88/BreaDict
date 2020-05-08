@@ -15,3 +15,9 @@
 /app/src/androidTest/*
 /app/src/test/*
 /app/src/main/AndroidManifest.xml
+/local.properties
+/app/build/outputs/logs/manifest-merger-debug-report.txt
+/app/build/intermediates/res/merged/debug/layout_activity_main.xml.flat
+/app/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt
+/.idea/workspace.xml
+/.idea/gradle.xml
