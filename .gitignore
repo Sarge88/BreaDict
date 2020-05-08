@@ -1,0 +1,17 @@
+/.gradle/*
+/.idea/*
+/gradle/*
+/BreadDict.iml
+/build.gradle
+/gradle.properties
+/gradlew
+/gradlew.bat
+/local.properties
+/settings.gradle
+/app/build/*
+/app/app.iml
+/app/build.gradle
+/app/proguard-rules.pro
+/app/src/androidTest/*
+/app/src/test/*
+/app/src/main/AndroidManifest.xml
