@@ -34,7 +34,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
-
+    Button removeBtn;
+    EditText removeInput;
+    Button searchBtn;
+    EditText searchInput;
+    String foundWord;
     Button addBtn;
     EditText input;
     Button colorizeBtn;
@@ -57,9 +61,10 @@ public class MainActivity extends AppCompatActivity {
         loadData();
 
         myTextView=(TextView)findViewById(R.id.timer);
-
         addDialog();
         colorizeDialog();
+        searchDialog();
+        removeDialog();
 
         Timer T=new Timer();
         T.scheduleAtFixedRate(new TimerTask() {
@@ -180,13 +185,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addNewWord(String input1, String input2){
-        TableLayout table = findViewById(R.id.table);
-        TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f);
-
         String word = input1 + "-" + input2 + "-0";
-
         clearTable();
-
         words.add(word);
         saveData();
         loadData();
@@ -251,11 +251,9 @@ public class MainActivity extends AppCompatActivity {
                     TextView text = (TextView) view2;
                     String s = (String) text.getText().toString();
                     boolean correct = word.equals(s);
-                    System.out.println(s+" "+word+" "+correct);
                     if (correct){
                         for(int z=0; z<words.size(); ++z){
                             String[] tomb = words.get(z).split("-");
-                            System.out.println(tomb[0]+" "+word);
                             if(tomb[0].equals(word)){
                                 if (color.equals("Piros")){
                                     view.setBackgroundColor(Color.RED);
@@ -289,19 +287,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void colorizeDialog(){
-
         final String[] colors = getResources().getStringArray(R.array.colors);
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Színezés");
         dialog.setIcon(R.drawable.ic_launcher_background);
-        //dialog.setMessage("[Magyar szó] - [színkód] | színkódok: p (piros), z (zöld), s (sárga), 0 (töröl)");
-
 
         input2 = new EditText(this);
         dialog.setView(input2);
-
-        //input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)
-
 
         dialog.setSingleChoiceItems(R.array.colors, -1, new DialogInterface.OnClickListener() {
             @Override
@@ -329,6 +321,168 @@ public class MainActivity extends AppCompatActivity {
 
         colorizeBtn = (Button) findViewById(R.id.colorize);
         colorizeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ad.show();
+            }
+        });
+    }
+
+    public void removeWord(String szo){
+
+        for(int i=0; i<words.size(); ++i){
+            String[] tomb = words.get(i).split("-");
+            if(tomb[0].equals(szo)){
+                words.remove(i);
+                saveData();
+                clearTable();
+                loadData();
+            }
+        }
+
+    }
+
+    public void removeDialog(){
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Szó törlése");
+        dialog.setIcon(R.drawable.ic_launcher_background);
+        dialog.setMessage("[Magyar szó]");
+
+        removeInput = new EditText(this);
+        dialog.setView(removeInput);
+
+        dialog.setPositiveButton("Törlés", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String szo = removeInput.getText().toString();
+                removeWord(szo);
+            }
+        });
+
+        dialog.setNegativeButton("Mégse", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        final AlertDialog ad = dialog.create();
+
+        removeBtn = (Button) findViewById(R.id.removeBtn);
+        removeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ad.show();
+            }
+        });
+    }
+
+    public void searchWord(String szo){
+
+        foundWord = "nincstalalat";
+
+        if(szo.equals("")){
+            clearTable();
+            loadData();
+        }else {
+            for (int i = 0; i < words.size(); ++i) {
+                String[] tomb = words.get(i).split("-");
+                if (tomb[0].equals(szo)) {
+                    foundWord = words.get(i);
+                    clearTable();
+
+                    TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f);
+
+                    TextView txtm = new TextView(this);
+                    TextView txtn = new TextView(this);
+                    txtm.setText("Magyar");
+                    txtn.setText("Német");
+                    txtm.setGravity(Gravity.CENTER);
+                    txtn.setGravity(Gravity.CENTER);
+                    txtm.setLayoutParams(params);
+                    txtn.setLayoutParams(params);
+                    txtm.setTypeface(Typeface.MONOSPACE, Typeface.BOLD);
+                    txtn.setTypeface(Typeface.MONOSPACE, Typeface.BOLD);
+                    txtm.setBackgroundColor(Color.LTGRAY);
+                    txtn.setBackgroundColor(Color.LTGRAY);
+                    TableLayout tableT = findViewById(R.id.table);
+                    TableRow newRowT = new TableRow(this);// add views to the row
+                    newRowT.addView(txtm);
+                    newRowT.addView(txtn);
+                    newRowT.addView(new TextView(this)); // you would actually want to set properties on this before adding it
+                    tableT.addView(newRowT, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+                    TextView txt1 = new TextView(this);
+                    TextView txt2 = new TextView(this);
+                    txt1.setText(tomb[0]);
+                    txt2.setText(tomb[1]);
+                    txt1.setGravity(Gravity.CENTER);
+                    txt2.setGravity(Gravity.CENTER);
+                    txt1.setLayoutParams(params);
+                    txt2.setLayoutParams(params);
+                    TableLayout table = findViewById(R.id.table);
+                    TableRow newRow = new TableRow(this);// add views to the row
+                    newRow.addView(txt1);
+                    newRow.addView(txt2);
+                    newRow.addView(new TextView(this)); // you would actually want to set properties on this before adding it
+                    table.addView(newRow, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+                    String color = tomb[2];
+
+                    if (color.equals("p")){
+                        txt1.setBackgroundColor(Color.RED);
+                        txt2.setBackgroundColor(Color.RED);
+                        words.set(i, tomb[0]+"-"+tomb[1]+"-p");
+                    }
+                    else if (color.equals("z")){
+                        txt1.setBackgroundColor(Color.GREEN);
+                        txt2.setBackgroundColor(Color.GREEN);
+                        words.set(i, tomb[0]+"-"+tomb[1]+"-z");
+                    }
+                    else if(color.equals("s")){
+                        txt1.setBackgroundColor(Color.YELLOW);
+                        txt2.setBackgroundColor(Color.YELLOW);
+                        words.set(i, tomb[0]+"-"+tomb[1]+"-s");
+                    }
+
+                }
+            }
+            if(foundWord.equals("nincstalalat")){
+                Toast.makeText(getApplicationContext(),"Nincs ilyen szó.",Toast.LENGTH_LONG).show();
+            }
+        }
+
+    }
+
+    public void searchDialog(){
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Szó keresése");
+        dialog.setIcon(R.drawable.ic_launcher_background);
+        dialog.setMessage("[Magyar szó]\nÜres keresés mindent mutat");
+        searchInput = new EditText(this);
+        dialog.setView(searchInput);
+
+        dialog.setPositiveButton("Keresés", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String szo = searchInput.getText().toString();
+                searchWord(szo);
+            }
+        });
+
+        dialog.setNegativeButton("Mégse", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        final AlertDialog ad = dialog.create();
+
+        searchBtn = (Button) findViewById(R.id.btnSearch);
+        searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ad.show();
