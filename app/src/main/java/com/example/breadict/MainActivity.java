@@ -43,11 +43,14 @@ public class MainActivity extends AppCompatActivity {
     EditText input;
     Button colorizeBtn;
     EditText input2;
-    TextView myTextView;
+    TextView timerTextView;
+    TextView wordCountTextView;
     ArrayList<String> words;
     int count=0;
     String selectedColor;
     private boolean table_flg = false;
+
+    static int wordCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         loadData();
 
-        myTextView=(TextView)findViewById(R.id.timer);
+        timerTextView=(TextView)findViewById(R.id.timer);
         addDialog();
         colorizeDialog();
         searchDialog();
@@ -75,12 +78,29 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run()
                     {
-                        myTextView.setText("Mennyit tanultam: "+count);
+                        timerTextView.setText("Mennyit tanultam: "+count);
                         count++;
                     }
                 });
             }
         }, 1000, 1000);
+
+        Timer C=new Timer();
+        C.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        wordCountTextView=(TextView)findViewById(R.id.wordCount);
+                        wordCountTextView.setText("Szavak száma: "+words.size());
+                    }
+                });
+            }
+        }, 500, 500);
+
 
     }
 
@@ -190,6 +210,8 @@ public class MainActivity extends AppCompatActivity {
         words.add(word);
         saveData();
         loadData();
+        wordCount = words.size();
+
     }
 
     public void addDialog(){
@@ -337,9 +359,9 @@ public class MainActivity extends AppCompatActivity {
                 saveData();
                 clearTable();
                 loadData();
+                wordCount = words.size();
             }
         }
-
     }
 
     public void removeDialog(){

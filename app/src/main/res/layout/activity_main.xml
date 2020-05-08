@@ -11,13 +11,12 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="468dp">
+        android:layout_height="360dp">
 
         <TableLayout
             android:id="@+id/table"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="0dp"
             android:layout_marginLeft="1dp"
@@ -25,7 +24,8 @@
             android:layout_marginRight="1dp"
             android:layout_marginBottom="1dp"
             android:background="#ffffff"
-            android:collapseColumns="0">
+            android:collapseColumns="0"
+            android:padding="10dp">
 
 
         </TableLayout>
@@ -36,9 +36,25 @@
         android:layout_height="262dp"
         android:keepScreenOn="true">
 
+        <TextView
+            android:id="@+id/wordCount"
+            android:layout_width="wrap_content"
+            android:layout_height="54dp"
+
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="117dp"
+            android:layout_marginRight="201dp"
+            android:layout_marginBottom="91dp"
+            android:textAllCaps="false" />
+
         <Button
             android:id="@+id/colorize"
-            android:layout_width="124dp"
+            android:layout_width="wrap_content"
             android:layout_height="55dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
@@ -47,7 +63,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="7dp"
             android:layout_marginTop="59dp"
-            android:layout_marginRight="280dp"
+            android:layout_marginRight="253dp"
             android:layout_marginBottom="148dp"
             android:onClick="colorize"
             android:text="Színezés"
@@ -55,49 +71,49 @@
 
         <Button
             android:id="@+id/btnSearch"
-            android:layout_width="124dp"
+            android:layout_width="99dp"
             android:layout_height="55dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
-            android:layout_marginLeft="143dp"
-            android:layout_marginTop="58dp"
-            android:layout_marginRight="144dp"
-            android:layout_marginBottom="149dp"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="59dp"
+            android:layout_marginRight="131dp"
+            android:layout_marginBottom="148dp"
             android:onClick="search"
             android:text="Keresés"
             android:textAllCaps="false" />
 
         <Button
             android:id="@+id/removeBtn"
-            android:layout_width="124dp"
+            android:layout_width="99dp"
             android:layout_height="55dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
-            android:layout_marginLeft="274dp"
-            android:layout_marginTop="57dp"
-            android:layout_marginRight="13dp"
-            android:layout_marginBottom="150dp"
+            android:layout_marginLeft="247dp"
+            android:layout_marginTop="58dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginBottom="148dp"
             android:onClick="removeWord"
             android:text="Szó törlés"
             android:textAllCaps="false" />
 
         <Button
             android:id="@+id/showGermanBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="55dp"
+            android:layout_width="153dp"
+            android:layout_height="57dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
-            android:layout_marginLeft="214dp"
-            android:layout_marginTop="1dp"
+            android:layout_marginLeft="194dp"
+            android:layout_marginTop="0dp"
             android:layout_marginRight="13dp"
             android:layout_marginBottom="205dp"
             android:onClick="collapseTable"
@@ -123,18 +139,18 @@
 
         <TextView
             android:id="@+id/timer"
-            android:layout_width="396dp"
-            android:layout_height="32dp"
+            android:layout_width="149dp"
+            android:layout_height="54dp"
 
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
-            android:layout_marginLeft="6dp"
-            android:layout_marginTop="111dp"
-            android:layout_marginRight="9dp"
-            android:layout_marginBottom="119dp"
+            android:layout_marginLeft="194dp"
+            android:layout_marginTop="119dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginBottom="92dp"
             android:textAllCaps="false" />
 
     </RelativeLayout>
